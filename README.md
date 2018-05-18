@@ -1,3 +1,6 @@
+## THIS IS AN ATTEMPT TO COMPARE APPLE VISION API TO GOOGLE ML KIT FACE DETECTION
+## Currently app easily crashes due to memory leak in Google code
+
 # Face Detection with Vision Framework
 ![ios11+](https://img.shields.io/badge/ios-11%2B-blue.svg)
 ![swift4+](https://img.shields.io/badge/swift-4%2B-orange.svg)
