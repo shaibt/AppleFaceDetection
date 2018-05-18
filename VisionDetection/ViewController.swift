@@ -8,12 +8,12 @@
 
 import UIKit
 import AVFoundation
-import Vision
+import Firebase
 
 class ViewController: UIViewController {
     
-    // VNRequest: Either Retangles or Landmarks
-    var faceDetectionRequest: VNRequest!
+    var googleFaceDetector : VisionFaceDetector!
+    var frameCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,8 @@ class ViewController: UIViewController {
         // Set up the video preview view.
         previewView.session = session
         
-        // Set up Vision Request
-        faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: self.handleFaces) // Default
-        setupVision()
+        // Set up ML Kit Face Detection
+        googleFaceDetector = Vision.vision().faceDetector()
         
         /*
          Check video authorization status. Video access is required and audio
@@ -134,11 +133,9 @@ class ViewController: UIViewController {
         }
     }
     
+    
     @IBAction func UpdateDetectionType(_ sender: UISegmentedControl) {
-        // use segmentedControl to switch over VNRequest
-        faceDetectionRequest = sender.selectedSegmentIndex == 0 ? VNDetectFaceRectanglesRequest(completionHandler: handleFaces) : VNDetectFaceLandmarksRequest(completionHandler: handleFaceLandmarks)
         
-        setupVision()
     }
     
     
@@ -165,8 +162,6 @@ class ViewController: UIViewController {
     
     private var videoDataOutput:    AVCaptureVideoDataOutput!
     private var videoDataOutputQueue = DispatchQueue(label: "VideoDataOutputQueue")
-    
-    private var requests = [VNRequest]()
     
     private func configureSession() {
         if self.setupResult != .success {
@@ -371,59 +366,49 @@ extension ViewController {
     }
 }
 
-extension ViewController {
-    func setupVision() {
-        self.requests = [faceDetectionRequest]
-    }
-    
-    func handleFaces(request: VNRequest, error: Error?) {
-        DispatchQueue.main.async {
-            //perform all the UI updates on the main queue
-            guard let results = request.results as? [VNFaceObservation] else { return }
-            self.previewView.removeMask()
-            for face in results {
-                self.previewView.drawFaceboundingBox(face: face)
-            }
-        }
-    }
-    
-    func handleFaceLandmarks(request: VNRequest, error: Error?) {
-        DispatchQueue.main.async {
-            //perform all the UI updates on the main queue
-            guard let results = request.results as? [VNFaceObservation] else { return }
-            self.previewView.removeMask()
-            for face in results {
-                self.previewView.drawFaceWithLandmarks(face: face)
-            }
-        }
-    }
-    
-
-}
-
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate{
     // MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-        let exifOrientation = CGImagePropertyOrientation(rawValue: exifOrientationFromDeviceOrientation()) else { return }
-        var requestOptions: [VNImageOption : Any] = [:]
         
-        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, nil) {
-            requestOptions = [.cameraIntrinsics : cameraIntrinsicData]
-        }
-        
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: requestOptions)
-        
-        do {
-            try imageRequestHandler.perform(requests)
-        }
+        if frameCount % 10 == 0 {
             
-        catch {
-            print(error)
+            guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+            
+            // Google MLKit
+            
+            let metadata = VisionImageMetadata()
+            let orientation = exifOrientationFromDeviceOrientation()
+            metadata.orientation = VisionDetectorImageOrientation(rawValue: UInt(orientation))!
+            
+            let width = CVPixelBufferGetWidth(pixelBuffer)
+            let height = CVPixelBufferGetHeight(pixelBuffer)
+            
+            let size = CGSize(width: width, height: height)
+            
+            let image = VisionImage(buffer: sampleBuffer)
+            image.metadata = metadata
+            
+            googleFaceDetector.detect(in: image)  { (faces, error) in
+                
+                DispatchQueue.main.async {
+                    //perform all the UI updates on the main queue
+                    guard error == nil, let faces = faces, !faces.isEmpty else {
+                        let errorString = error?.localizedDescription ?? "No results returned."
+                        print("Face detection failed with error: \(errorString)")
+                        return
+                    }
+                    
+                    self.previewView.removeMask()
+                    for face in faces {
+                        self.previewView.drawFaceboundingBox(face: face, imageSize: size)
+                    }
+                }
+            }
+            
         }
         
-    }
-    
+        frameCount = frameCount + 1
+    }    
 }
 
 

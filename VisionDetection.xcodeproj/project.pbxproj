@@ -13,6 +13,9 @@
 		02611D9B1EEA5317009714B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02611D9A1EEA5317009714B8 /* Assets.xcassets */; };
 		02611D9E1EEA5317009714B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02611D9C1EEA5317009714B8 /* LaunchScreen.storyboard */; };
 		02611DA61EEA5683009714B8 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02611DA51EEA5683009714B8 /* PreviewView.swift */; };
+		17D523C320AEEA8B00CA29BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17D523C220AEEA8B00CA29BA /* GoogleService-Info.plist */; };
+		17D523C520AEEA9200CA29BA /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 17D523C420AEEA9200CA29BA /* Podfile */; };
+		B4D0235CE5019C579475694A /* Pods_VisionDetection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05613353D5D5226A92B8AB3C /* Pods_VisionDetection.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,11 @@
 		02611D9D1EEA5317009714B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02611D9F1EEA5317009714B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02611DA51EEA5683009714B8 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		05613353D5D5226A92B8AB3C /* Pods_VisionDetection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VisionDetection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		17D523C220AEEA8B00CA29BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		17D523C420AEEA9200CA29BA /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		61A0A6738A2A67E4252F278F /* Pods-VisionDetection.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisionDetection.release.xcconfig"; path = "Pods/Target Support Files/Pods-VisionDetection/Pods-VisionDetection.release.xcconfig"; sourceTree = "<group>"; };
+		B9D7DE1408627B95538D477E /* Pods-VisionDetection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VisionDetection.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VisionDetection/Pods-VisionDetection.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4D0235CE5019C579475694A /* Pods_VisionDetection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +49,11 @@
 		02611D871EEA5317009714B8 = {
 			isa = PBXGroup;
 			children = (
+				17D523C420AEEA9200CA29BA /* Podfile */,
 				02611D921EEA5317009714B8 /* VisionDetection */,
 				02611D911EEA5317009714B8 /* Products */,
+				28BFBA4DE1E00CF0B1B78525 /* Pods */,
+				7474D8221360B4C49A19A2F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +68,7 @@
 		02611D921EEA5317009714B8 /* VisionDetection */ = {
 			isa = PBXGroup;
 			children = (
+				17D523C220AEEA8B00CA29BA /* GoogleService-Info.plist */,
 				02611D931EEA5317009714B8 /* AppDelegate.swift */,
 				02611D951EEA5317009714B8 /* ViewController.swift */,
 				02611DA51EEA5683009714B8 /* PreviewView.swift */,
@@ -67,6 +80,23 @@
 			path = VisionDetection;
 			sourceTree = "<group>";
 		};
+		28BFBA4DE1E00CF0B1B78525 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B9D7DE1408627B95538D477E /* Pods-VisionDetection.debug.xcconfig */,
+				61A0A6738A2A67E4252F278F /* Pods-VisionDetection.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7474D8221360B4C49A19A2F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05613353D5D5226A92B8AB3C /* Pods_VisionDetection.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02611DA21EEA5317009714B8 /* Build configuration list for PBXNativeTarget "VisionDetection" */;
 			buildPhases = (
+				2078CF651317007DEE96061D /* [CP] Check Pods Manifest.lock */,
 				02611D8C1EEA5317009714B8 /* Sources */,
 				02611D8D1EEA5317009714B8 /* Frameworks */,
 				02611D8E1EEA5317009714B8 /* Resources */,
+				F35D707DC6F78BA78F1D08E7 /* [CP] Embed Pods Frameworks */,
+				68C628613D0824F586705519 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -125,13 +158,80 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17D523C520AEEA9200CA29BA /* Podfile in Resources */,
 				02611D9E1EEA5317009714B8 /* LaunchScreen.storyboard in Resources */,
+				17D523C320AEEA8B00CA29BA /* GoogleService-Info.plist in Resources */,
 				02611D9B1EEA5317009714B8 /* Assets.xcassets in Resources */,
 				02611D991EEA5317009714B8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2078CF651317007DEE96061D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VisionDetection-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68C628613D0824F586705519 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-VisionDetection/Pods-VisionDetection-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleMobileVision/GoogleMVFaceDetectorResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVFaceDetectorResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VisionDetection/Pods-VisionDetection-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F35D707DC6F78BA78F1D08E7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-VisionDetection/Pods-VisionDetection-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VisionDetection/Pods-VisionDetection-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		02611D8C1EEA5317009714B8 /* Sources */ = {
@@ -271,12 +371,13 @@
 		};
 		02611DA31EEA5317009714B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9D7DE1408627B95538D477E /* Pods-VisionDetection.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YMQ7S58LN7;
+				DEVELOPMENT_TEAM = 6JJKSRRQE7;
 				INFOPLIST_FILE = VisionDetection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WeiChieh.VisionDetection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caazam.shaibt.MLKitFaceDetection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -285,12 +386,13 @@
 		};
 		02611DA41EEA5317009714B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61A0A6738A2A67E4252F278F /* Pods-VisionDetection.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = YMQ7S58LN7;
+				DEVELOPMENT_TEAM = 6JJKSRRQE7;
 				INFOPLIST_FILE = VisionDetection/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WeiChieh.VisionDetection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.caazam.shaibt.MLKitFaceDetection;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -8,6 +8,7 @@
 
 import UIKit
 import Vision
+import Firebase
 import AVFoundation
 
 class PreviewView: UIView {
@@ -61,6 +62,47 @@ class PreviewView: UIView {
         _ = createLayer(in: facebounds)
         
     }
+    
+    func drawFaceboundingBox(face : VisionFace, imageSize: CGSize) {
+        
+        let viewSize = self.frame.size
+        
+        // Find resolution for the view and image
+        let rView = viewSize.width / viewSize.height
+        let rImage = imageSize.width / imageSize.height
+        
+        // Define scale based on comparing resolutions
+        var scale: CGFloat
+        if rView > rImage {
+            scale = viewSize.height / imageSize.height
+        } else {
+            scale = viewSize.width / imageSize.width
+        }
+        
+        // Calculate scaled feature frame size
+        let featureWidthScaled = face.frame.width * scale
+        let featureHeightScaled = face.frame.height * scale
+        
+        // Calculate scaled feature frame top-left point
+        let imageWidthScaled = imageSize.width * scale
+        let imageHeightScaled = imageSize.height * scale
+        
+        let imagePointXScaled = (viewSize.width - imageWidthScaled) / 2
+        let imagePointYScaled = (viewSize.height - imageHeightScaled) / 2
+        
+        let featurePointXScaled = imagePointXScaled + face.frame.origin.x * scale
+        let featurePointYScaled = imagePointYScaled + face.frame.origin.y * scale
+        
+        // Define a rect for scaled feature frame
+        let featureRectScaled = CGRect(x: featurePointXScaled,
+                                       y: featurePointYScaled,
+                                       width: featureWidthScaled,
+                                       height: featureHeightScaled)
+        
+        _ = createLayer(in: featureRectScaled)
+        
+    }
+    
     
     func drawFaceWithLandmarks(face: VNFaceObservation) {
         
